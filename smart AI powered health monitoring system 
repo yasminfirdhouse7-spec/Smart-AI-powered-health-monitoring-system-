@@ -1,0 +1,363 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <windows.h>
+
+using namespace std;
+
+int healthScore = 100;
+
+string username;
+string password;
+
+int waterGlasses = 0;
+int sleepHours = 0;
+
+string medicineName;
+string medicineTime;
+
+string riskLevel;
+
+void loadingEffect() {
+
+    cout << "\nLoading";
+
+    for(int i = 0; i < 5; i++) {
+        cout << ".";
+        Sleep(400);
+    }
+
+    cout << "\n";
+}
+
+void waterTracker() {
+
+    cout << "\n===== WATER TRACKER =====\n";
+
+    cout << "How many glasses of water did you drink today? ";
+    cin >> waterGlasses;
+
+    if(waterGlasses < 5) {
+
+        cout << "Notification: Drink more water!\n";
+        healthScore -= 15;
+    }
+
+    else {
+
+        cout << "Good hydration!\n";
+    }
+}
+
+void sleepTracker() {
+
+    cout << "\n===== SLEEP TRACKER =====\n";
+
+    cout << "How many hours did you sleep? ";
+    cin >> sleepHours;
+
+    if(sleepHours < 6) {
+
+        cout << "Notification: You need more sleep!\n";
+        healthScore -= 20;
+    }
+
+    else {
+
+        cout << "Good sleep schedule!\n";
+    }
+}
+
+void medicineReminder() {
+
+    cin.ignore();
+
+    cout << "\n===== MEDICINE REMINDER =====\n";
+
+    cout << "Enter medicine name: ";
+    getline(cin, medicineName);
+
+    cout << "Enter medicine time: ";
+    getline(cin, medicineTime);
+
+    cout << "Medicine reminder saved successfully!\n";
+}
+
+void symptomChecker() {
+
+    char fever, headache, cold, tiredness;
+
+    cout << "\n===== SYMPTOM CHECKER =====\n";
+
+    cout << "Do you have fever? (y/n): ";
+    cin >> fever;
+
+    cout << "Do you have headache? (y/n): ";
+    cin >> headache;
+
+    cout << "Do you have cold? (y/n): ";
+    cin >> cold;
+
+    cout << "Do you feel tiredness? (y/n): ";
+    cin >> tiredness;
+
+    if(fever == 'y') {
+        healthScore -= 15;
+    }
+
+    if(headache == 'y') {
+        healthScore -= 10;
+    }
+
+    if(cold == 'y') {
+        healthScore -= 10;
+    }
+
+    if(tiredness == 'y') {
+        healthScore -= 15;
+    }
+
+    loadingEffect();
+
+    cout << "Symptoms analyzed successfully!\n";
+}
+
+void healthRiskSystem() {
+
+    cout << "\n===== HEALTH RISK SYSTEM =====\n";
+
+    if(healthScore >= 80) {
+
+        riskLevel = "LOW";
+    }
+
+    else if(healthScore >= 50) {
+
+        riskLevel = "MEDIUM";
+    }
+
+    else {
+
+        riskLevel = "HIGH";
+    }
+
+    cout << "Risk Level: " << riskLevel << endl;
+
+    if(riskLevel == "HIGH") {
+
+        cout << "WARNING: Please consult a doctor immediately!\n";
+    }
+}
+
+void aiHealthTips() {
+
+    cout << "\n===== AI HEALTH TIPS =====\n";
+
+    if(waterGlasses < 5) {
+        cout << "- Drink more water daily.\n";
+    }
+
+    if(sleepHours < 6) {
+        cout << "- Improve your sleep schedule.\n";
+    }
+
+    if(healthScore < 50) {
+        cout << "- Take proper rest and monitor symptoms.\n";
+    }
+
+    if(healthScore >= 80) {
+        cout << "- Great job! Maintain your healthy routine.\n";
+    }
+}
+
+void healthDashboard() {
+
+    cout << "\n===== HEALTH DASHBOARD =====\n";
+
+    cout << "Username: " << username << endl;
+    cout << "Water Intake: " << waterGlasses << " glasses\n";
+    cout << "Sleep Hours: " << sleepHours << " hours\n";
+    cout << "Medicine: " << medicineName << endl;
+    cout << "Medicine Time: " << medicineTime << endl;
+    cout << "Health Score: " << healthScore << "/100\n";
+    cout << "Risk Level: " << riskLevel << endl;
+}
+
+void dailyHealthReport() {
+
+    cout << "\n===== DAILY HEALTH REPORT =====\n";
+
+    cout << "Health Score: " << healthScore << "/100\n";
+
+    if(healthScore >= 80) {
+
+        cout << "Overall Status: Healthy\n";
+    }
+
+    else if(healthScore >= 50) {
+
+        cout << "Overall Status: Moderate\n";
+    }
+
+    else {
+
+        cout << "Overall Status: Unhealthy\n";
+    }
+}
+
+void userHistory() {
+
+    ofstream file("health_history.txt", ios::app);
+
+    file << "\n===== USER HISTORY =====\n";
+    file << "Username: " << username << endl;
+    file << "Water Intake: " << waterGlasses << endl;
+    file << "Sleep Hours: " << sleepHours << endl;
+    file << "Medicine: " << medicineName << endl;
+    file << "Medicine Time: " << medicineTime << endl;
+    file << "Health Score: " << healthScore << endl;
+    file << "Risk Level: " << riskLevel << endl;
+
+    file.close();
+
+    cout << "\nUser history saved successfully!\n";
+}
+
+void aiChatbot() {
+
+    string question;
+
+    cin.ignore();
+
+    while(true) {
+
+        cout << "\nAsk AI Chatbot (type exit to stop): ";
+        getline(cin, question);
+
+        if(question == "exit") {
+            break;
+        }
+
+        else if(question.find("fever") != string::npos) {
+
+            cout << "AI: Drink fluids and monitor your temperature.\n";
+        }
+
+        else if(question.find("headache") != string::npos) {
+
+            cout << "AI: Take proper rest and stay hydrated.\n";
+        }
+
+        else if(question.find("cold") != string::npos) {
+
+            cout << "AI: Drink warm fluids and rest.\n";
+        }
+
+        else if(question.find("stress") != string::npos) {
+
+            cout << "AI: Try meditation and proper sleep.\n";
+        }
+
+        else if(question.find("sleep") != string::npos) {
+
+            cout << "AI: Maintain 7-8 hours of sleep daily.\n";
+        }
+
+        else {
+
+            cout << "AI: Please consult a healthcare professional.\n";
+        }
+    }
+}
+
+int main() {
+
+    int choice;
+
+    cout << "=====================================\n";
+    cout << " SMART HEALTH CARE ASSISTANT\n";
+    cout << "=====================================\n";
+
+    cout << "\nCreate Username: ";
+    cin >> username;
+
+    cout << "Create Password: ";
+    cin >> password;
+
+    cout << "\nLogin Successful!\n";
+
+    do {
+
+        cout << "\n=====================================\n";
+        cout << " MAIN DASHBOARD\n";
+        cout << "=====================================\n";
+
+        cout << "1. Water Tracker\n";
+        cout << "2. Sleep Tracker\n";
+        cout << "3. Medicine Reminder\n";
+        cout << "4. Symptom Checker\n";
+        cout << "5. Health Dashboard\n";
+        cout << "6. AI Chatbot\n";
+        cout << "7. AI Health Tips\n";
+        cout << "8. Health Risk System\n";
+        cout << "9. Daily Health Report\n";
+        cout << "10. Save User History\n";
+        cout << "11. Exit\n";
+
+        cout << "\nEnter your choice: ";
+        cin >> choice;
+
+        switch(choice) {
+
+            case 1:
+                waterTracker();
+                break;
+
+            case 2:
+                sleepTracker();
+                break;
+
+            case 3:
+                medicineReminder();
+                break;
+
+            case 4:
+                symptomChecker();
+                break;
+
+            case 5:
+                healthDashboard();
+                break;
+
+            case 6:
+                aiChatbot();
+                break;
+
+            case 7:
+                aiHealthTips();
+                break;
+
+            case 8:
+                healthRiskSystem();
+                break;
+
+            case 9:
+                dailyHealthReport();
+                break;
+
+            case 10:
+                userHistory();
+                break;
+
+            case 11:
+                cout << "\nThank you for using the system!\n";
+                break;
+
+            default:
+                cout << "\nInvalid choice!\n";
+        }
+
+    } while(choice != 11);
+
+    return 0;
+}
