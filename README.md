@@ -235,6 +235,7 @@ I developed this project to explore how technology can be used to solve real-wor
 Through this project, I gained practical experience in C++ programming, file handling, user-centered design, healthcare-focused problem solving, and AI-inspired system development.
 
 I believe technology should be used to create meaningful solutions that positively impact people's lives, and this project represents an important step in my learning journey.
+I built this project to change the society in some way I could achieve.
 
 ---
 
